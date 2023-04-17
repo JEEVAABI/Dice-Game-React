@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content=
+		"width=device-width, initial-scale=1.0">
+	<title>Dice Game</title>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Let's Play</h1>
+
+		<div class="dice">
+			<p class="Player1">Player 1</p>
+			<img class="img1" src="dice6.png">
+		</div>
+
+		<div class="dice">
+			<p class="Player2">Player 2</p>
+			<img class="img2" src="dice6.png">
+		</div>
+	</div>
+
+	<div class="container bottom">
+		<button type="button" class="butn"
+			onClick="rollTheDice()">
+			Roll the Dice
+		</button>
+	</div>
+	<div class="container bottom">
+		<button type="button" class="butn"
+			onClick="editNames()">
+			Edit Names
+		</button>
+	</div>
+</body>
+
+</html>
+
+
+static defaultProps = {
+    sides : ['one', 'two', 'three',
+            'four', 'five', 'six']
+}
+constructor(props){
+    super(props)
+    
+    // States
+    this.state = {
+    die1 : 'one',
+    
+    rolling: false
+    }
+    this.roll = this.roll.bind(this)
+}
+
+roll(){
+    const {sides} = this.props
+    this.setState({
+    
+    // Changing state upon click
+    die1 : sides[(Math.floor(Math.random() * sides.length))],
+
+    rolling: true
+    })
+    
+    // Start timer of one sec when rolling start
+    setTimeout(() => {
+    
+    // Set rolling to false again when time over
+    this.setState({rolling:false})
+    },1000)
+
+
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content
+		="width=device-width, initial-scale=1.0">
+	<title>Dice Game</title>
+
+	<style>
+		.container {
+			width: 70%;
+			margin: auto;
+			text-align: center;
+		}
+
+		.dice {
+			text-align: center;
+			display: inline-block;
+			margin: 10px;
+		}
+
+		body {
+			background-color: #042f4b;
+			margin: 0;
+		}
+
+		h1 {
+			margin: 30px;
+			font-family: "Lobster", cursive;
+			text-shadow: 5px 0 #232931;
+			font-size: 4.5rem;
+			color: #4ecca3;
+			text-align: center;
+		}
+
+		p {
+			font-size: 2rem;
+			color: #4ecca3;
+			font-family: "Indie Flower", cursive;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		.bottom {
+			padding-top: 30px;
+		}
+
+		.butn {
+			background: #4ecca3;
+			font-family: "Indie Flower", cursive;
+			border-radius: 7px;
+			color: #ffff;
+			font-size: 30px;
+			padding: 16px 25px 16px 25px;
+			text-decoration: none;
+		}
+
+		.butn:hover {
+			background: #232931;
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Let's Play</h1>
+
+		<div class="dice">
+			<p class="Player1">Player 1</p>
+			<img class="img1" src="dice6.png">
+		</div>
+
+		<div class="dice">
+			<p class="Player2">Player 2</p>
+			<img class="img2" src="dice6.png">
+		</div>
+	</div>
+
+	<div class="container bottom">
+		<button type="button" class="butn"
+			onClick="rollTheDice()">
+			Roll the Dice
+		</button>
+	</div>
+	<div class="container bottom">
+		<button type="button" class="butn"
+			onClick="editNames()">
+			Edit Names
+		</button>
+	</div>
+
+	<script>
+
+		// Player name
+		var player1 = "Player 1";
+		var player2 = "Player 2";
+
+		// Function to change the player name
+		function editNames() {
+			player1 = prompt("Change Player1 name");
+			player2 = prompt("Change player2 name");
+
+			document.querySelector("p.Player1")
+							.innerHTML = player1;
+							
+			document.querySelector("p.Player2")
+							.innerHTML = player2;
+		}
+
+		// Function to roll the dice
+		function rollTheDice() {
+			setTimeout(function () {
+				var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+				var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+
+				document.querySelector(".img1").setAttribute("src",
+					"dice" + randomNumber1 + ".png");
+
+				document.querySelector(".img2").setAttribute("src",
+					"dice" + randomNumber2 + ".png");
+
+				if (randomNumber1 === randomNumber2) {
+					document.querySelector("h1").innerHTML = "Draw!";
+				}
+
+				else if (randomNumber1 < randomNumber2) {
+					document.querySelector("h1").innerHTML
+						= (player2 + " WINS!");
+				}
+
+				else {
+					document.querySelector("h1").innerHTML
+						= (player1 + " WINS!");
+				}
+			}, 2500);
+		}
+	</script>
+</body>
+
+</html>
+
+
+
+import React,{ Component } from 'react'
+import './RollDice.css'
+import Die from './Die'
+
+class RollDice extends Component{
+
+// Face numbers passes as default props
+static defaultProps = {
+	sides : ['one', 'two', 'three',
+			'four', 'five', 'six']
+}
+constructor(props){
+	super(props)
+	
+	// States
+	this.state = {
+	die1 : 'one',
+	die2 : 'one',
+	rolling: false
+	}
+	this.roll = this.roll.bind(this)
+}
+roll(){
+	const {sides} = this.props
+	this.setState({
+	
+	// Changing state upon click
+	die1 : sides[(Math.floor(Math.random() * sides.length))],
+	die2 : sides[(Math.floor(Math.random() * sides.length))],
+	rolling: true
+	})
+	
+	// Start timer of one sec when rolling start
+	setTimeout(() => {
+	
+	// Set rolling to false again when time over
+	this.setState({rolling:false})
+	},1000)
+}
+
+render(){
+	const handleBtn = this.state.rolling ?
+					'RollDice-rolling' : ''
+	const {die1, die2, rolling} = this.state
+	return(
+	<div className='RollDice'>
+		<div className='RollDice-container'>
+		<Die face={die1} rolling={rolling}/>
+		<Die face={die2} rolling={rolling}/>
+		</div>
+		<button className={handleBtn}
+				disabled={this.state.rolling}
+				onClick={this.roll}>
+		{this.state.rolling ? 'Rolling' : 'Roll Dice!'}
+		</button>
+	</div>
+	)
+}
+}
+
+export default RollDice
+
+
+.RollDice{
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
+    }
+    
+    /* Shows each dice in one row */
+    .RollDice-container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    }
+    /* Styling rolldice button */
+    .RollDice button{
+    width:15em;
+    padding:1.5em;
+    border: 0px;
+    border-radius: 10px;
+    color:white;
+    background-color:black;
+    margin-top: 3em;
+    align-self: center;
+    }
+    
+    /* Setting hover effect on button */
+    .RollDice button:hover{
+    cursor: pointer;
+    }
+    
+    .RollDice-rolling{
+    border: 0px;
+    border-radius: 10px;
+    background-color:darkslateblue !important;
+    opacity:0.7
+    }
+    import React, {Component} from 'react'
+    import React, {Component} from 'react'
+    import './Die.css'
+    import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+    
+    class Die extends Component{
+    render(){
+        const {face, rolling} = this.props
+        
+        // Using font awesome icon to show
+        // the exactnumber of dots
+        return (
+                <div>
+                    <FontAwesomeIcon icon={['fas', `fa-dice-${face}`]} className={`Die
+                    ${rolling && 'Die-shaking'}`} />
+                </div >
+            )
+    }
+    }
+    
+    export default Die
+    /* Styling each Die */
+    .Die{
+    font-size:10em;
+    padding:0.25em;
+    color:slateblue;
+    }
+    create me a dice game using reactjs in which 2 players one after roll a dice and if a player got one or six the same player should reapeat again or that chance given to player 2 
+    
+    /* Applying Animation */
+    .Die-shaking{
+    animation-name:wobble;
+    animation-duration: 1s;
+    }
+    
+    /* Setting Animation effect to the
+    dice using css keyframe */
+    @keyframes wobble {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    15% {
+        transform: translate3d(-25%, 0, 0)
+                rotate3d(0, 0, 1, -5deg);
+    }
+    30% {
+        transform: translate3d(20%, 0, 0)
+                rotate3d(0, 0, 1, 3deg);
+    }
+    45% {
+        transform: translate3d(-15%, 0, 0)
+                rotate3d(0, 0, 1, -3deg);
+    }
+    60% {
+        transform: translate3d(10%, 0, 0)
+                rotate3d(0, 0, 1, 2deg);
+    }
+    75% {
+        transform: translate3d(-5%, 0, 0)
+                rotate3d(0, 0, 1, -1deg);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+    }
+            
+
+    import React, { useState } from 'react';
+
+function DiceGame() {
+  const [player, setPlayer] = useState(1);
+  const [diceValue, setDiceValue] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  
+  const rollDice = () => {
+    const value = Math.floor(Math.random() * 6) + 1;
+    setDiceValue(value);
+    
+    if (value === 1 || value === 6) {
+      // If the player rolled a 1 or 6, they get to roll again.
+      return;
+    }
+    
+    // Otherwise, switch to the other player.
+    setPlayer(player === 1 ? 2 : 1);
+  };
+  
+  const resetGame = () => {
+    setPlayer(1);
+    setDiceValue(0);
+    setGameOver(false);
+  };
+  
+  return (
+    <div>
+      <h1>Dice Game</h1>
+      <p>Player {player}'s turn</p>
+      <p>Dice value: {diceValue}</p>
+      <button onClick={rollDice}>Roll Dice</button>
+      {gameOver && <p>Game over! Player {player} wins!</p>}
+      <button onClick={resetGame}>Reset Game</button>
+    </div>
+  );
+}
+
+export default DiceGame;
+
+
+
+import React, { Component } from 'react';
+
+class DiceGame extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      player: 1,
+      diceValue: 0,
+      gameOver: false,
+    };
+    this.rollDice = this.rollDice.bind(this);
+    this.resetGame = this.resetGame.bind(this);
+  }
+
+  rollDice() {
+    const value = Math.floor(Math.random() * 6) + 1;
+    this.setState({ diceValue: value });
+    
+    if (value === 1 || value === 6) {
+      // If the player rolled a 1 or 6, they get to roll again.
+      return;
+    }
+    
+    // Otherwise, switch to the other player.
+    this.setState({ player: this.state.player === 1 ? 2 : 1 });
+  }
+
+  resetGame() {
+    this.setState({
+      player: 1,
+      diceValue: 0,
+      gameOver: false,
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Dice Game</h1>
+        <p>Player {this.state.player}'s turn</p>
+        <p>Dice value: {this.state.diceValue}</p>
+        <button onClick={this.rollDice}>Roll Dice</button>
+        {this.state.gameOver && <p>Game over! Player {this.state.player} wins!</p>}
+        <button onClick={this.resetGame}>Reset Game</button>
+      </div>
+    );
+  }
+}
+
+export default DiceGame;
